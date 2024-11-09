@@ -1,0 +1,21 @@
+[Unit]
+Description=Set Up Additional Binary Formats
+Documentation=man:systemd-binfmt.service(8) man:binfmt.d(5)
+DefaultDependencies=no
+Conflicts=shutdown.target
+After=proc-sys-fs-binfmt_misc.automount
+After=proc-sys-fs-binfmt_misc.mount
+After=local-fs.target
+Before=sysinit.target shutdown.target
+ConditionPathIsMountPoint=/proc/sys/fs/binfmt_misc
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/lib/systemd/systemd-binfmt
+ExecStop=/lib/systemd/systemd-binfmt --unregister
+TimeoutSec=90s
+
+[Install]
+WantedBy=multi-user.target
+

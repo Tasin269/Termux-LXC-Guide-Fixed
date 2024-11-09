@@ -1,0 +1,3 @@
+# FSTAB FOR CUSTOM LXC CONTAINER MOUNTS
+
+binfmt_misc /proc/sys/fs/binfmt_misc binfmt_misc defaults 0 0
